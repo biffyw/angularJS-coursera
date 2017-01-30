@@ -9,22 +9,27 @@
       .message { font-size: 1.3em; font-weight: bold; }
     </style>
   </head>
+
 <body ng-app='LunchCheck'>
    <div ng-controller='LCController' class="container">
      <h1>Lunch Checker</h1>
 
          <div class="form-group">
-             <input id="lunch-menu" type="text" ng-model = 'lunchList'
-             placeholder="list comma separated dishes you usually have for lunch"
-             class="form-control">
+             <input id="lunch-menu" type="text" ng-model="lunchList"
+             placeholder="list comma separated dishes you usually have for lunch; note: empty items (ie. ', ,') are ignored"
+             class="form-control"
+             ng-focus='clearMessage()'>
          </div>
+
          <div class="form-group">
              <button ng-click = 'listCheck()' class="btn btn-default">Check If Too Much</button>
          </div>
-         <div class="form-group message">
+
+         <div ng-style="{color: msgColour}" class="form-group message">
            {{message}}
          </div>
    </div>
+
    <script src="angular.min.js"></script>
    <script src="app.js"></script></body>
 </html>
