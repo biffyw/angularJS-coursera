@@ -27,7 +27,11 @@
   function ShoppingListCheckoffService() {
       var service = this;
 
-      var itemsToBuy = ['10 foo', '29 bar', '8 baz', '99 fizz', '11 blart'];
+      var itemsToBuy = [ { quantity: 10, name: 'foo'},
+                         { quantity: 29, name: 'bar'},
+                         { quantity: 8, name: 'baz'},
+                         { quantity: 99, name: 'fizz'},
+                         { quantity: 11, name: 'blart'} ];
       var itemsAlreadyBought = [];
 
       service.getItemsToBuy = function() {
