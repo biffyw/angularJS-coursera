@@ -1,2 +1,10 @@
-
-<div ng-if="list.isEmpty()">Nothing found</div>
+<br><br><br>
+<div ng-if='shortList.found.length'>
+  <h3>Search Results</h3>
+  <ul>
+    <li ng-repeat='item in shortList.found'>
+    {{item.name}},{{}},{{}} <button ng-click='shortList.onRemove({index: $index})'>Don't Want This!</button>
+    </li>
+  </ul>
+</div>
+<div ng-if='shortList.emptySearch()'>foofoofoo</div>
