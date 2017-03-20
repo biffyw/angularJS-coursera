@@ -24,6 +24,7 @@ function FoundItemsDirective() {
 function FoundItemsDirectiveController() {
     var shortList = this;
 
+    console.log('found, searchTerm:', shortList.found, shortList.searchTerm);
     shortList.emptySearch = function() {
       console.log('foo! foo!', shortList.found);
       return true;
@@ -35,9 +36,9 @@ MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 
 function NarrowItDownController( MenuSearchService ) {
   var shortList = this;
-  var foo = 'bar';
 
   shortList.searchTerm = '';
+  shortList.found = [];
 
   console.log("foo!");
   shortList.narrowIt = function(searchTerm) {
@@ -49,6 +50,7 @@ function NarrowItDownController( MenuSearchService ) {
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function (response) {
       shortList.found = response;
+      console.log(response);
       for (var i in shortList.found) {
         console.log(shortList.found[i].description.toLowerCase());
       }
@@ -61,7 +63,7 @@ function NarrowItDownController( MenuSearchService ) {
     shortList.found.splice( index, 1);
   };
 
-  function getMessage() {
+  shortList.getMessage = function() {
     return ("blahblabhahbhbhbhb");
   };
 };
