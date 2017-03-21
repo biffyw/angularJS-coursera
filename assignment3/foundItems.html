@@ -1,9 +1,9 @@
-<br><br><br>
 <div ng-if='shortList.found.length'>
+  <br /><br />
   <h3>Search Results</h3>
   <ul>
     <li ng-repeat='item in shortList.found'>
-    {{item.name}},{{}},{{}} <button ng-click='shortList.onRemove({index: $index})'>Don't Want This!</button>
+    {{item.short_name}}:  {{item.name}},{{item.description}} <button ng-click='shortList.onRemove({index: $index})'>Don't Want This!</button>
     </li>
   </ul>
 </div>
