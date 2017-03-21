@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html ng-app = "NarrowItDownApp" lang="en">
+<!doctype html>
+<html  class='ng-scope' ng-app = "NarrowItDownApp" lang="en">
   <head>
     <title>Narrow Down Your Menu Choice</title>
     <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
@@ -24,6 +24,7 @@
 
     <!-- found-items should be implemented as a component -->
     <found-items found='shortList.found' on-remove=shortList.removeItem(index)></found-items>
+    <div ng-if='shortList.emptySearch'>Nothing Found.</div>
   </div>
 
 </body>

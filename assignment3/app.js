@@ -4,7 +4,7 @@
 angular.module("NarrowItDownApp", [])
 .controller("NarrowItDownController", NarrowItDownController)
 .service("MenuSearchService", MenuSearchService)
-.constant('ApiBasePath', "https://davids-restaurant.herokuapp.com")
+.constant('ApiBasePath', "http://davids-restaurant.herokuapp.com")
 .directive('foundItems', FoundItemsDirective);
 
 function FoundItemsDirective() {
@@ -24,10 +24,10 @@ function FoundItemsDirective() {
 function FoundItemsDirectiveController() {
     var shortList = this;
 
-    console.log('found, searchTerm:', shortList.found, shortList.searchTerm);
+    console.log('foo! foo!')
     shortList.emptySearch = function() {
-      console.log('foo! foo!', shortList.found);
-      return true;
+      console.log('emptySearch', shortList.found);
+      return shortList.found.length == 0;
     };
 };
 
@@ -36,24 +36,26 @@ MenuSearchService.$inject = ['$http', 'ApiBasePath'];
 
 function NarrowItDownController( MenuSearchService ) {
   var shortList = this;
+  var emptySearch = false;
 
   shortList.searchTerm = '';
-  shortList.found = [];
 
   console.log("foo!");
   shortList.narrowIt = function(searchTerm) {
     if( shortList.searchTerm.trim().length === 0 ) {
       shortList.found = [];
+      shortList.emptySearch = true;
       return;
     };
+    shortList.emptySearch = false;
 
     var promise = MenuSearchService.getMatchedMenuItems(searchTerm);
     promise.then(function (response) {
       shortList.found = response;
-      console.log(response);
       for (var i in shortList.found) {
         console.log(shortList.found[i].description.toLowerCase());
       }
+      shortList.emptySearch = (shortList.found.length === 0);
     });
   };
 
@@ -63,9 +65,6 @@ function NarrowItDownController( MenuSearchService ) {
     shortList.found.splice( index, 1);
   };
 
-  shortList.getMessage = function() {
-    return ("blahblabhahbhbhbhb");
-  };
 };
 
 function MenuSearchService( $http, ApiBasePath ) {
